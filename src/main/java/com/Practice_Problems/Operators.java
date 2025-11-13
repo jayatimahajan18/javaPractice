@@ -3,45 +3,24 @@ package com.Practice_Problems;
 import java.util.Scanner;
 
 public class Operators {
-    public static void main(String[] args) {
-        try (Scanner operationType = new Scanner(System.in)) {
-            System.out.println("What u wnat to do? 1.Number or 2.Name");
-            int choice = operationType.nextInt();
-            if (choice == 1) {
-                System.out.println("Enter two numbers:");
-                int num1 = operationType.nextInt();
-                int num2 = operationType.nextInt();
-                System.out.println("What operation: 1.Addition 2.Subtraction 3.Multiplication 4.Division 5.Equal");
-                 int operation = operationType.nextInt();
-            int result = 0;
-            if (operation == 1) {
-                result = add(num1, num2);
-                System.out.println("Result: " + result);
-            } else if (operation == 2) {
-                result = subtract(num1, num2);
-                System.out.println("Result: " + result);
-            } else if (operation == 3) {
-                result = multiply(num1, num2);
-                System.out.println("Result: " + result);
-            } else if (operation == 4) {
-                result = divide(num1, num2);
-                System.out.println("Result: " + result);
-            } else if (operation == 5) {
-                boolean isEqual = equal(num1, num2);
-                System.out.println("Are both numbers equal? " + isEqual);
+    public static Scanner operationType = new Scanner(System.in);
 
-            } else if (operation == 6) {
-                boolean startsWithS = checkNameStartWithS(operationType.next());
-                System.out.println("Does the name start with S? " + startsWithS);
-            }
-            } else if (choice == 2) {
-                System.out.println("Enter a name:");
-                String name = operationType.next();
-                boolean startsWithS = checkNameStartWithS(name);
-                System.out.println("Does the name start with S? " + startsWithS);
-            } else {
-                System.out.println("Invalid choice");
-            }
+    public static void main(String[] args) {
+        System.out.println("What u wnat to do? 1.Number or 2.Name");
+        int choice = operationType.nextInt();
+        if (choice == 1) {
+            System.out.println("Enter two numbers:");
+            int num1 = operationType.nextInt();
+            int num2 = operationType.nextInt();
+            int operation = selectOperation();
+            calculator(operation, num1, num2);
+        } else if (choice == 2) {
+            System.out.println("Enter a name:");
+            String name = operationType.next();
+            boolean startsWithS = checkNameStartWithS(name);
+            System.out.println("Does the name start with S? " + startsWithS);
+        } else {
+            System.out.println("Invalid choice");
         }
     }
 
@@ -71,7 +50,36 @@ public class Operators {
 
     public static boolean checkNameStartWithS(String name) {
         // return name.startsWith("S");
-        return name.charAt(0) == 'S';
+        name = name.toLowerCase();
+        return name.charAt(0) == 's';
     }
 
+    public static void calculator(int operation, int num1, int num2) {
+        int result = 0;
+        if (operation == 1) {
+            result = add(num1, num2);
+            System.out.println("Result: " + result);
+        } else if (operation == 2) {
+            result = subtract(num1, num2);
+            System.out.println("Result: " + result);
+        } else if (operation == 3) {
+            result = multiply(num1, num2);
+            System.out.println("Result: " + result);
+        } else if (operation == 4) {
+            result = divide(num1, num2);
+            System.out.println("Result: " + result);
+        } else if (operation == 5) {
+            boolean isEqual = equal(num1, num2);
+            System.out.println("Are both numbers equal? " + isEqual);
+        } else {
+            System.out.println("Invalid operation");
+        }
+    }
+
+    public static int selectOperation() {
+        System.out.println("What operation: 1.Addition 2.Subtraction 3.Multiplication 4.Division 5.Equal");
+        int operation = operationType.nextInt();
+        return operation;
+
+    }
 }
