@@ -7,13 +7,25 @@ import java.io.IOException;
 
 public class FileOperation {
     public static void main(String[] args) {
+        FileOperation fileOp= new FileOperation();
         String filePath = "output.txt";
         String content = "Hello, this is a sample content for the file.";
-        writeIntoFile(filePath, content);
-        readFile(filePath);
+        boolean result = fileOp.writeIntoFile(filePath, content);
+        if (result) {
+            System.out.println("File writing operation completed successfully.");
+        } else {
+            System.out.println("File writing operation failed.");
+        }
+        String readResult = fileOp.readFile(filePath);
+        if(readResult!=null){
+            System.out.println("File reading operation completed successfully.");
+        }
+        else if(readResult==null){
+            System.out.println("File is empty.");
+        }
     }
 
-    public static void writeIntoFile(String filePath, String content) {
+    public boolean writeIntoFile(String filePath, String content) {
         FileWriter file;
         // Code to write content into a file at the specified filePath
         try {
@@ -21,23 +33,28 @@ public class FileOperation {
             file.write(content);
             file.write(System.lineSeparator());
             file.write("Another line written to the file.");
-            System.out.println("Successfully wrote to the file.");
+           // System.out.println("Successfully wrote to the file.");
             file.close();
+            return true;
         } catch (IOException io) {
             System.out.println("An error occurred: " + io.getMessage());
         }
+        return false;
     }
-    public static void readFile(String file){
+    public String readFile(String file){
+        String line;
+        String content="";
         try{
             BufferedReader reader= new BufferedReader(new FileReader(file));
-            String line;
             while((line= reader.readLine()) != null){
-                System.out.println(line);
+                content+=line + System.lineSeparator();  // Accumulate lines
             }
+            reader.close();
+            return content;
         }
         catch(IOException io){
             System.out.println("An error occurred: " + io.getMessage());
         }
-        
+        return null;
     }
 }
