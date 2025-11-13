@@ -3,6 +3,8 @@ settings.json
 .vscode/
 .target/
 .output.txt
+# Ignore compiled Java files
+*.class
 # Ignore common personal JSON configs
 *.settings.json
 *.local.json
