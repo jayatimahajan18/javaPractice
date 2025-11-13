@@ -1,0 +1,8 @@
+# Ignore local/editor settings
+settings.json
+.vscode/
+.target/
+.output.txt
+# Ignore common personal JSON configs
+*.settings.json
+*.local.json
